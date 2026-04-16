@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>vLLM AI Cost Optimizer</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<style>
+		body {
+			background: #0a0e27;
+			color: #e0e0e0;
+		}
+		.tab-active {
+			border-bottom: 3px solid #00ff00;
+			color: #00ff00;
+		}
+		.card-hover {
+			transition: all 0.3s ease;
+		}
+		.card-hover:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+			border-color: #00ff00;
+		}
+		.metric {
+			background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+			color: #00ff00;
+			border: 1px solid #00ff00;
+			border-radius: 8px;
+			padding: 16px;
+		}
+		.savings-badge {
+			background: #00ff00;
+			color: #0a0e27;
+			padding: 4px 12px;
+			border-radius: 20px;
+			font-weight: bold;
+		}
+		.loading {
+			display: inline-block;
+			animation: pulse 1.5s ease-in-out infinite;
+		}
+		@keyframes pulse {
+			0%, 100% { opacity: 1; }
+			50% { opacity: 0.5; }
+		}
+	</style>
+</head>
+<body>
+	<div class="min-h-screen flex flex-col" style="background: #0a0e27;">
+		<!-- Header -->
+		<div class="shadow-lg border-b" style="background: #0f1424; border-color: #00ff00;">
+			<div class="max-w-7xl mx-auto px-4 py-6">
+				<h1 class="text-4xl font-bold" style="color: #00ff00; text-shadow: 0 0 10px rgba(0,255,0,0.5);">
+					⚡ AI Cost Optimizer
+				</h1>
+				<p class="mt-2" style="color: #00ff00;">Real-time GPU optimization for cost-conscious AI teams</p>
+			</div>
+		</div>
+
+		<!-- Tabs -->
+		<div class="border-b sticky top-0 z-10" style="background: #0f1424; border-color: #00ff00;">
+			<div class="max-w-7xl mx-auto px-4 flex gap-8">
+				<button onclick="switchTab('optimizer')" class="tab-active px-4 py-4 font-semibold border-b-4">
+					💰 GPU Optimizer
+				</button>
+				<button onclick="switchTab('chat')" class="px-4 py-4 font-semibold border-b-4 border-transparent" style="color: #000000; hover: color: #00ff00;">
+					💬 Chat Interface
+				</button>
+			</div>
+		</div>
+
+		<!-- Main Content -->
+		<div class="flex-1" style="background: #0a0e27;">
+			<div class="max-w-7xl mx-auto px-4 py-8">
+				
+				<!-- OPTIMIZER TAB -->
+				<div id="optimizer-tab" class="block">
+					<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+						<!-- Input Form -->
+						<div class="lg:col-span-1">
+						<div class="rounded-xl shadow-lg p-6" style="background: #0f1424; border: 1px solid #00ff00;">
+							<h2 class="text-2xl font-bold mb-6" style="color: #00ff00;">📊 Your Requirements</h2>
+							
+							<form id="optimizeForm" class="space-y-4">
+								<div>
+									<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Monthly Tokens</label>
+									<input type="number" id="monthlyTokens" value="1000000"
+										class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00; focus-outline: none; focus-ring-color: #00ff00;" />
+								</div>
+
+								<div>
+									<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Avg Input Tokens</label>
+									<input type="number" id="avgInputTokens" value="256"
+										class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
+									</div>
+
+									<div>
+										<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Avg Output Tokens</label>
+										<input type="number" id="avgOutputTokens" value="512"
+											class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
+									</div>
+
+									<div>
+										<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Traffic Pattern</label>
+										<select id="trafficPattern"
+											class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;">
+											<option value="steady" style="background: #0a0e27; color: #00ff00;">Steady (constant load)</option>
+											<option value="busty" style="background: #0a0e27; color: #00ff00;">Busty (80% peak spikes)</option>
+											<option value="mixed" style="background: #0a0e27; color: #00ff00;">Mixed (40% avg spikes)</option>
+										</select>
+									</div>
+
+									<div>
+										<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Latency Target (sec)</label>
+										<input type="number" id="latencyTarget" value="1.0"
+											class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
+														<p class="text-xs mt-1" style="color: #000000;">Max latency per request</p>
+									</div>
+
+									<div>
+										<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Monthly Budget ($)</label>
+										<input type="number" id="monthlyBudget" value="5000"
+											class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
+									</div>
+
+									<div>
+										<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Similarity Ratio (0-1)</label>
+										<input type="number" id="similarityRatio" value="0.5" min="0" max="1" step="0.1"
+											class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
+														<p class="text-xs mt-1" style="color: #000000;">Model similarity (higher = better optimization)</p>
+									</div>
+
+									<button type="submit"
+										class="w-full px-6 py-3 rounded-lg hover:shadow-lg transition-all font-semibold mt-6" style="background: #00ff00; color: #0a0e27; box-shadow: 0 0 20px rgba(0,255,0,0.5);">
+										🚀 Optimize
+									</button>
+								</form>
+							</div>
+						</div>
+
+						<!-- Results -->
+						<div id="results-container" class="lg:col-span-2 space-y-6">
+							<div class="text-center py-16">
+								<p class="text-lg" style="color: #000000;">Fill in your requirements and click Optimize to see recommendations</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- CHAT TAB -->
+				<div id="chat-tab" class="hidden">
+					<!-- Chat content will be here (copied from index.html) -->
+					<div class="rounded-lg shadow-lg p-6" style="background: #0f1424; border: 1px solid #00ff00;">
+						<div id="chatMessages" class="chat-container space-y-4 mb-6" style="height: 400px; overflow-y: auto;">
+							<div class="flex justify-center py-12">
+								<div class="text-center">
+									<div class="text-4xl mb-4">💬</div>
+										<p style="color: #000000;">Start a conversation with the AI</p>
+								</div>
+							</div>
+						</div>
+
+						<form id="chatForm" class="flex gap-3">
+							<input type="text" id="userInput" placeholder="Type your message..."
+								class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
+							<input type="number" id="temperature" placeholder="Temperature" min="0" max="1" step="0.1" value="0.7"
+								class="w-20 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
+							<button type="submit"
+								class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all font-medium">
+								Send
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function switchTab(tab) {
+			// Hide all tabs
+			document.getElementById('optimizer-tab').classList.add('hidden');
+			document.getElementById('chat-tab').classList.add('hidden');
+			document.querySelectorAll('.tab-active').forEach(el => {
+				el.classList.remove('tab-active');
+				el.classList.add('text-black', 'border-transparent');
+			});
+
+			// Show selected tab
+			document.getElementById(tab + '-tab').classList.remove('hidden');
+			event.target.classList.add('tab-active');
+			event.target.classList.remove('text-black', 'border-transparent');
+		}
+
+		// OPTIMIZER LOGIC
+		document.getElementById('optimizeForm').addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			const resultsContainer = document.getElementById('results-container');
+			resultsContainer.innerHTML = '<div class="text-center py-12"><div class="loading text-xl">🔄 Optimizing...</div></div>';
+
+			const payload = {
+				monthly_tokens: parseInt(document.getElementById('monthlyTokens').value),
+				avg_input_tokens: parseInt(document.getElementById('avgInputTokens').value),
+				avg_output_tokens: parseInt(document.getElementById('avgOutputTokens').value),
+				traffic_pattern: document.getElementById('trafficPattern').value,
+				latency_target_sec: parseFloat(document.getElementById('latencyTarget').value),
+				current_budget_monthly: parseFloat(document.getElementById('monthlyBudget').value),
+				similarity_ratio: parseFloat(document.getElementById('similarityRatio').value),
+			};
+
+			try {
+				const response = await fetch('/optimize', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(payload)
+				});
+
+				if (!response.ok) throw new Error('API error');
+				const data = await response.json();
+
+				displayResults(data);
+			} catch (error) {
+				resultsContainer.innerHTML = `<div class="rounded-lg p-6" style="background: #1a1f3a; border: 1px solid #ff0000; color: #ff6666;">⚠️ Error: ${error.message}</div>`;
+			}
+		});
+
+		function displayResults(data) {
+			const rec = data.recommended;
+			const resultsContainer = document.getElementById('results-container');
+
+			let html = `
+				<div class="rounded-xl shadow-lg p-6" style="background: #0f1424; border: 2px solid #00ff00;">
+					<h3 class="text-2xl font-bold mb-4" style="color: #00ff00;">✅ Recommended GPU</h3>
+					<div class="grid grid-cols-2 gap-4">
+						<div>
+							<p style="color: #000000;">Cluster</p>
+							<p class="text-2xl font-bold" style="color: #00ff00;">${rec.cluster_name}</p>
+							<p class="text-sm" style="color: #000000;">${rec.gpu_type}</p>
+						</div>
+						<div>
+							<p style="color: #000000;">Monthly Cost</p>
+							<p class="text-3xl font-bold" style="color: #00ff00;">$${rec.monthly_cost}</p>
+						</div>
+						<div>
+							<p style="color: #000000;">Throughput</p>
+							<p class="text-lg font-semibold" style="color: #00ff00;">${rec.throughput_tokens_per_sec} tokens/sec</p>
+						</div>
+						<div>
+							<p style="color: #000000;">Potential Savings</p>
+							<p class="text-2xl font-bold savings-badge">$${data.potential_monthly_savings}/mo</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="rounded-xl shadow-lg p-6" style="background: #0f1424; border: 1px solid #00ff00;">
+					<h3 class="text-xl font-bold mb-4" style="color: #00ff00;">📊 All GPU Options</h3>
+					<div class="overflow-x-auto">
+						<table class="w-full text-sm">
+							<thead style="background: #1a1f3a; border-color: #00ff00;" class="border-b-2">
+								<tr>
+									<th class="px-4 py-3 text-left font-semibold" style="color: #00ff00;">GPU</th>
+									<th class="px-4 py-3 text-right font-semibold" style="color: #00ff00;">Monthly Cost</th>
+									<th class="px-4 py-3 text-right font-semibold" style="color: #00ff00;">Savings vs Max</th>
+									<th class="px-4 py-3 text-right font-semibold" style="color: #00ff00;">Throughput</th>
+									<th class="px-4 py-3 text-center font-semibold" style="color: #00ff00;">Latency</th>
+									<th class="px-4 py-3 text-center font-semibold" style="color: #00ff00;">Budget OK</th>
+								</tr>
+							</thead>
+							<tbody style="background: #0f1424;">
+			`;
+
+			data.all_options.forEach((opt, idx) => {
+				const isRecommended = opt.cluster_id === rec.cluster_id;
+				const rowStyle = isRecommended ? 'background: rgba(0,255,0,0.15); border-left: 3px solid #00ff00;' : 'background: #0f1424; border-left: 3px solid transparent;';
+				const budgetOk = opt.budget_feasible ? '✅' : '❌';
+				const latencyOk = opt.meets_latency ? '✅' : '⚠️';
+				const textColor = isRecommended ? '#00ff00' : '#e0e0e0';
+
+				html += `
+					<tr style="${rowStyle} color: ${textColor};">
+						<td class="px-4 py-3 font-semibold" style="color: ${textColor};">${opt.cluster_name}</td>
+						<td class="px-4 py-3 text-right font-bold" style="color: ${textColor};">$${opt.monthly_cost}</td>
+						<td class="px-4 py-3 text-right font-semibold" style="color: #00ff00;">$${(Math.max(...data.all_options.map(o => o.monthly_cost)) - opt.monthly_cost).toFixed(2)}</td>
+						<td class="px-4 py-3 text-right" style="color: ${textColor};">${opt.throughput_tokens_per_sec} t/s</td>
+						<td class="px-4 py-3 text-center" style="color: ${textColor};">${latencyOk}</td>
+						<td class="px-4 py-3 text-center" style="color: ${textColor};">${budgetOk}</td>
+					</tr>
+				`;
+			});
+
+			html += `
+						</tbody>
+					</table>
+				</div>
+
+				<div class="rounded-xl shadow-lg p-6" style="background: #1a1f3a; border: 1px solid #00ff00;">
+					<h3 class="text-lg font-bold mb-3" style="color: #00ff00;">📈 Optimization Summary</h3>
+
+						<div>
+							<p style="color: #00ff00;">Estimated Requests/Month</p>
+							<p class="font-semibold" style="color: #00ff00;">${data.requests_per_month.toLocaleString()}</p>
+						</div>
+						<div>
+							<p style="color: #00ff00;">Traffic Pattern</p>
+							<p class="font-semibold capitalize" style="color: #00ff00;">${data.optimization_summary.traffic_pattern}</p>
+						</div>
+						<div>
+							<p style="color: #00ff00;">Similarity Ratio</p>
+							<p class="font-semibold" style="color: #00ff00;">${(data.optimization_summary.similarity_ratio * 100).toFixed(0)}%</p>
+						</div>
+					</div>
+				</div>
+			`;
+
+			resultsContainer.innerHTML = html;
+		}
+
+		// CHAT LOGIC (from previous implementation)
+		let isLoading = false;
+		document.getElementById('chatForm').addEventListener('submit', async (e) => {
+			e.preventDefault();
+			
+			const chatMessages = document.getElementById('chatMessages');
+			const userInput = document.getElementById('userInput');
+			const temperature = document.getElementById('temperature');
+
+			if (!userInput.value.trim() || isLoading) return;
+
+			const message = userInput.value.trim();
+			const temp = parseFloat(temperature.value) || 0.7;
+
+			userInput.value = '';
+
+			// Add user message
+			addMessage('user', message);
+
+			isLoading = true;
+			const loadingId = addLoadingMessage();
+
+			try {
+				const response = await fetch('/generate', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						prompt: message,
+						temperature: temp,
+						max_tokens: 256
+					})
+				});
+
+				if (!response.ok) throw new Error(`API error: ${response.status}`);
+				const data = await response.json();
+
+				removeMessage(loadingId);
+				addMessage('assistant', data.response, data);
+
+			} catch (error) {
+				removeMessage(loadingId);
+				addMessage('error', `Error: ${error.message}`);
+			} finally {
+				isLoading = false;
+				userInput.focus();
+			}
+		});
+
+		function addMessage(role, content, metrics = null) {
+			const chatMessages = document.getElementById('chatMessages');
+			const msgDiv = document.createElement('div');
+			msgDiv.className = `message`;
+
+			if (role === 'user') {
+				msgDiv.innerHTML = `
+					<div class="flex justify-end mb-4">
+						<div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg px-4 py-2 max-w-xs">
+							${escapeHtml(content)}
+						</div>
+					</div>
+				`;
+			} else if (role === 'assistant') {
+				const metricsHtml = metrics ? `
+					<div class="flex flex-wrap gap-2 mt-2 pt-2 border-t border-gray-200 text-xs">
+						<span class="bg-gray-200 px-2 py-1 rounded">⏱️ ${metrics.latency_ms.toFixed(0)}ms</span>
+						<span class="bg-gray-200 px-2 py-1 rounded">🔢 ${metrics.tokens_used} tokens</span>
+						<span class="bg-gray-200 px-2 py-1 rounded">💰 $${metrics.cost_usd.toFixed(6)}</span>
+					</div>
+				` : '';
+				msgDiv.innerHTML = `
+					<div class="flex mb-4">
+									<div class="bg-gray-100 text-black rounded-lg px-4 py-2 max-w-xs">
+							<div>${escapeHtml(content)}</div>
+							${metricsHtml}
+						</div>
+					</div>
+				`;
+			} else if (role === 'error') {
+				msgDiv.innerHTML = `
+					<div class="flex mb-4">
+						<div class="bg-red-100 text-red-800 rounded-lg px-4 py-2">
+							${escapeHtml(content)}
+						</div>
+					</div>
+				`;
+			}
+
+			chatMessages.appendChild(msgDiv);
+			chatMessages.scrollTop = chatMessages.scrollHeight;
+			return msgDiv;
+		}
+
+		function addLoadingMessage() {
+			const chatMessages = document.getElementById('chatMessages');
+			const msgDiv = document.createElement('div');
+			msgDiv.className = 'flex mb-4';
+			msgDiv.innerHTML = `
+				<div class="bg-gray-100 text-black rounded-lg px-4 py-2">
+					<div class="flex gap-1">
+						<span class="loading">●</span>
+						<span class="loading">●</span>
+						<span class="loading">●</span>
+					</div>
+				</div>
+			`;
+			chatMessages.appendChild(msgDiv);
+			chatMessages.scrollTop = chatMessages.scrollHeight;
+			return msgDiv;
+		}
+
+		function removeMessage(element) {
+			element.remove();
+		}
+
+		function escapeHtml(text) {
+			const div = document.createElement('div');
+			div.textContent = text;
+			return div.innerHTML;
+		}
+	</script>
+</body>
+</html>

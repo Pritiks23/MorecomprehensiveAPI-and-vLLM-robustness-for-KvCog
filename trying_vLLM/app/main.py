@@ -3,7 +3,7 @@ import time
 import logging
 from fastapi import FastAPI, Request
 from starlette.middleware.base import BaseHTTPMiddleware
-from app.routes import completion, health
+from app.routes import completion, health, generate, optimizer
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -25,3 +25,5 @@ app.add_middleware(LoggingMiddleware)
 # Include routers
 app.include_router(completion.router)
 app.include_router(health.router)
+app.include_router(generate.router)
+app.include_router(optimizer.router)

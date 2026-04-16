@@ -18,11 +18,11 @@ async def chat_completions(request: Request, body: ChatRequest):
 
 	if stream:
 		async def token_stream():
-			async for chunk in client.generate_completion(messages, stream=True):
+			async for chunk in client.stream_completion(messages):
 				# OpenAI streaming format: data: {json}\n
 				yield f"data: {chunk}\n"
 			yield "data: [DONE]\n"
 		return StreamingResponse(token_stream(), media_type="text/event-stream")
 	else:
-		result = await client.generate_completion(messages, stream=False)
+		result = await client.generate_completion(messages)
 		return JSONResponse(content=result, status_code=status.HTTP_200_OK)

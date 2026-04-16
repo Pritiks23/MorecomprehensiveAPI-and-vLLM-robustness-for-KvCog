@@ -1,0 +1,97 @@
+"""
+GPU Cluster Database with empirical performance and cost data.
+These relationships scale predictably based on similarity ratio and batch size.
+"""
+
+GPU_CLUSTERS = [
+    {
+        "id": 1,
+        "name": "RTX4090-cluster",
+        "gpu_type": "RTX 4090",
+        "base_throughput": 55,  # tokens/sec
+        "optimized_throughput": 119.8,
+        "base_cost_per_token": 0.00000696,
+        "optimized_cost_per_token": 6.96e-6,
+    },
+    {
+        "id": 2,
+        "name": "A100-40GB",
+        "gpu_type": "NVIDIA A100",
+        "base_throughput": 90,
+        "optimized_throughput": 182.2,
+        "base_cost_per_token": 0.0000107,
+        "optimized_cost_per_token": 1.07e-5,
+    },
+    {
+        "id": 3,
+        "name": "H100-PCIe",
+        "gpu_type": "NVIDIA H100",
+        "base_throughput": 120,
+        "optimized_throughput": 224.4,
+        "base_cost_per_token": 0.0000124,
+        "optimized_cost_per_token": 1.24e-5,
+    },
+    {
+        "id": 4,
+        "name": "A6000-cluster",
+        "gpu_type": "NVIDIA RTX A6000",
+        "base_throughput": 70,
+        "optimized_throughput": 152.5,
+        "base_cost_per_token": 0.0000102,
+        "optimized_cost_per_token": 1.02e-5,
+    },
+    {
+        "id": 5,
+        "name": "T4-scaled",
+        "gpu_type": "NVIDIA T4",
+        "base_throughput": 30,
+        "optimized_throughput": 74.6,
+        "base_cost_per_token": 0.00000447,
+        "optimized_cost_per_token": 4.47e-6,
+    },
+    {
+        "id": 6,
+        "name": "V100-DGX",
+        "gpu_type": "NVIDIA V100",
+        "base_throughput": 85,
+        "optimized_throughput": 185.1,
+        "base_cost_per_token": 0.00000675,
+        "optimized_cost_per_token": 6.75e-6,
+    },
+    {
+        "id": 7,
+        "name": "L4-cluster",
+        "gpu_type": "NVIDIA L4",
+        "base_throughput": 40,
+        "optimized_throughput": 99.4,
+        "base_cost_per_token": 0.00000419,
+        "optimized_cost_per_token": 4.19e-6,
+    },
+    {
+        "id": 8,
+        "name": "MI250X-cluster",
+        "gpu_type": "AMD MI250X",
+        "base_throughput": 100,
+        "optimized_throughput": 217.8,
+        "base_cost_per_token": 0.00000829,
+        "optimized_cost_per_token": 8.29e-6,
+    },
+    {
+        "id": 9,
+        "name": "H200-DGX",
+        "gpu_type": "NVIDIA H200",
+        "base_throughput": 130,
+        "optimized_throughput": 243.1,
+        "base_cost_per_token": 0.0000137,
+        "optimized_cost_per_token": 1.37e-5,
+    },
+    {
+        "id": 10,
+        "name": "A30-cluster",
+        "gpu_type": "NVIDIA A30",
+        "base_throughput": 75,
+        "optimized_throughput": 163.4,
+        "base_cost_per_token": 0.00000646,
+        "optimized_cost_per_token": 6.46e-6,
+    },
+]
