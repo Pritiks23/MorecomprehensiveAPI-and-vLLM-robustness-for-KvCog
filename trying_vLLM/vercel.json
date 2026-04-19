@@ -2,12 +2,6 @@
   "buildCommand": "pip install -r requirements.txt",
   "devCommand": "uvicorn app.main:app --host 0.0.0.0 --port 3000 --reload",
   "framework": "fastapi",
-  "functions": {
-    "api/index.py": {
-      "memory": 1024,
-      "maxDuration": 60
-    }
-  },
   "env": {
     "PYTHONUNBUFFERED": "true"
   }
