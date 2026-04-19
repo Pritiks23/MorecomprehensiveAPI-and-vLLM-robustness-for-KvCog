@@ -3,11 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>vLLM AI Cost Optimizer</title>
+	<title>KV Cognition</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<style>
 		body {
-			background: #0a0e27;
+			background: linear-gradient(135deg, #0a0e27 0%, #0f1424 100%);
 			color: #e0e0e0;
 		}
 		.tab-active {
@@ -44,27 +44,94 @@
 			0%, 100% { opacity: 1; }
 			50% { opacity: 0.5; }
 		}
+		@keyframes slideIn {
+			from { opacity: 0; transform: translateY(10px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+		.nav-menu {
+			animation: slideIn 0.3s ease-out;
+		}
 	</style>
 </head>
 <body>
-	<div class="min-h-screen flex flex-col" style="background: #0a0e27;">
-		<!-- Header -->
-		<div class="shadow-lg border-b" style="background: #0f1424; border-color: #00ff00;">
-			<div class="max-w-7xl mx-auto px-4 py-6">
-				<h1 class="text-4xl font-bold" style="color: #00ff00; text-shadow: 0 0 10px rgba(0,255,0,0.5);">
-					⚡ AI Cost Optimizer
+	<div class="min-h-screen flex flex-col" style="background: linear-gradient(135deg, #0a0e27 0%, #0f1424 100%);">
+		<!-- Navbar -->
+		<nav class="fixed w-full top-0 z-50 shadow-lg" style="background: rgba(15, 20, 36, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 255, 0, 0.2);">
+			<div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+				<!-- Logo -->
+				<div style="color: #00ff00; font-weight: bold; font-size: 24px;" class="flex items-center gap-2">
+					<span style="font-size: 28px;">🧠</span>
+					KV Cognition
+				</div>
+				
+				<!-- Nav Items -->
+				<div class="flex items-center gap-8">
+					<a href="#" style="color: #e0e0e0; text-decoration: none; font-size: 14px;">Home</a>
+					<a href="#" style="color: #e0e0e0; text-decoration: none; font-size: 14px;">Features</a>
+					<a href="#" style="color: #e0e0e0; text-decoration: none; font-size: 14px;">Pricing</a>
+					<a href="#" style="color: #e0e0e0; text-decoration: none; font-size: 14px;">Docs</a>
+					<button class="px-6 py-2 rounded-lg font-semibold transition-all hover:shadow-lg" style="background: #00ff00; color: #0a0e27; box-shadow: 0 0 20px rgba(0,255,0,0.3);">
+						Get Started
+					</button>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Hero Section -->
+		<div class="pt-32 pb-12 px-4" style="background: linear-gradient(135deg, rgba(0,255,0,0.05) 0%, transparent 100%);">
+			<div class="max-w-6xl mx-auto text-center">
+				<div class="mb-6" style="color: #00ff00; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+					⚡ Powered by vLLM & GPU Intelligence
+				</div>
+				<h1 class="text-5xl font-bold mb-6" style="color: #ffffff; text-shadow: 0 0 30px rgba(0,255,0,0.3);">
+					Smart GPU Optimization<br><span style="background: linear-gradient(135deg, #00ff00, #00cc88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">for AI Teams
 				</h1>
-				<p class="mt-2" style="color: #00ff00;">Real-time GPU optimization for cost-conscious AI teams</p>
+				<p class="text-xl mb-12" style="color: #b0b0b0; max-width: 600px; margin-left: auto; margin-right: auto;">
+					Cut your AI infrastructure costs by up to 60% while maintaining performance. Real-time optimization powered by advanced GPU analytics.
+				</p>
+				<div class="flex gap-4 justify-center">
+					<button class="px-8 py-3 rounded-lg font-semibold transition-all hover:shadow-xl" style="background: #00ff00; color: #0a0e27; box-shadow: 0 0 30px rgba(0,255,0,0.4);">
+						Start Optimizing →
+					</button>
+					<button class="px-8 py-3 rounded-lg font-semibold border-2 transition-all hover:shadow-lg" style="border-color: #00ff00; color: #00ff00;">
+						View Docs
+					</button>
+				</div>
+				<!-- Stats Row -->
+				<div class="mt-16 grid grid-cols-3 gap-8 pt-8 border-t" style="border-color: rgba(0,255,0,0.2);">
+					<div>
+						<div class="text-3xl font-bold" style="color: #00ff00;">60%</div>
+						<div style="color: #b0b0b0;">Average Savings</div>
+					</div>
+					<div>
+						<div class="text-3xl font-bold" style="color: #00ff00;">500+</div>
+						<div style="color: #b0b0b0;">GPU Models Supported</div>
+					</div>
+					<div>
+						<div class="text-3xl font-bold" style="color: #00ff00;">Real-time</div>
+						<div style="color: #b0b0b0;">AI-Powered Optimization</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Header -->
+		<div class="shadow-lg border-b mx-4 rounded-xl" style="background: linear-gradient(135deg, #0f1424 0%, #1a1f3a 100%); border-color: rgba(0, 255, 0, 0.3); margin-top: 20px;">
+			<div class="max-w-7xl mx-auto px-6 py-8">
+				<h2 class="text-3xl font-bold mb-2" style="color: #00ff00; text-shadow: 0 0 10px rgba(0,255,0,0.5);">
+					💰 GPU Cost Optimizer
+				</h2>
+				<p class="mt-2" style="color: #b0b0b0;">Find the perfect GPU configuration for your workload and budget</p>
 			</div>
 		</div>
 
 		<!-- Tabs -->
-		<div class="border-b sticky top-0 z-10" style="background: #0f1424; border-color: #00ff00;">
-			<div class="max-w-7xl mx-auto px-4 flex gap-8">
-				<button onclick="switchTab('optimizer')" class="tab-active px-4 py-4 font-semibold border-b-4">
+		<div class="border-b sticky top-20 z-10 mx-4 rounded-t-xl" style="background: linear-gradient(135deg, #0f1424 0%, #1a1f3a 100%); border-color: rgba(0, 255, 0, 0.3);">
+			<div class="max-w-7xl mx-auto px-6 flex gap-8">
+				<button onclick="switchTab('optimizer')" class="tab-active px-6 py-4 font-semibold border-b-4 transition-all">
 					💰 GPU Optimizer
 				</button>
-				<button onclick="switchTab('chat')" class="px-4 py-4 font-semibold border-b-4 border-transparent" style="color: #000000; hover: color: #00ff00;">
+				<button onclick="switchTab('chat')" class="px-6 py-4 font-semibold border-b-4 border-transparent transition-all" style="color: #b0b0b0; hover: color: #00ff00;">
 					💬 Chat Interface
 				</button>
 			</div>
@@ -73,7 +140,7 @@
 		<!-- Main Content -->
 		<div class="flex-1" style="background: #0a0e27;">
 			<div class="max-w-7xl mx-auto px-4 py-8">
-				
+
 				<!-- OPTIMIZER TAB -->
 				<div id="optimizer-tab" class="block">
 					<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -81,101 +148,154 @@
 						<div class="lg:col-span-1">
 						<div class="rounded-xl shadow-lg p-6" style="background: #0f1424; border: 1px solid #00ff00;">
 							<h2 class="text-2xl font-bold mb-6" style="color: #00ff00;">📊 Your Requirements</h2>
-							
+
 							<form id="optimizeForm" class="space-y-4">
 								<div>
 									<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Monthly Tokens</label>
 									<input type="number" id="monthlyTokens" value="1000000"
-										class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00; focus-outline: none; focus-ring-color: #00ff00;" />
+										   class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00; focus-outline: none; focus-ring-color: #00ff00;" />
 								</div>
 
 								<div>
 									<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Avg Input Tokens</label>
 									<input type="number" id="avgInputTokens" value="256"
-										class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
+										   class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
 									</div>
 
 									<div>
-										<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Avg Output Tokens</label>
-										<input type="number" id="avgOutputTokens" value="512"
-											class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
+										   <label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Avg Output Tokens</label>
+										   <input type="number" id="avgOutputTokens" value="512"
+										   class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
 									</div>
 
 									<div>
-										<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Traffic Pattern</label>
-										<select id="trafficPattern"
-											class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;">
-											<option value="steady" style="background: #0a0e27; color: #00ff00;">Steady (constant load)</option>
-											<option value="busty" style="background: #0a0e27; color: #00ff00;">Busty (80% peak spikes)</option>
-											<option value="mixed" style="background: #0a0e27; color: #00ff00;">Mixed (40% avg spikes)</option>
-										</select>
+										   <label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Traffic Pattern</label>
+										   <select id="trafficPattern"
+										   class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;">
+										   <option value="steady" style="background: #0a0e27; color: #00ff00;">Steady (constant load)</option>
+										   <option value="busty" style="background: #0a0e27; color: #00ff00;">Busty (80% peak spikes)</option>
+										   <option value="mixed" style="background: #0a0e27; color: #00ff00;">Mixed (40% avg spikes)</option>
+										   </select>
 									</div>
 
 									<div>
-										<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Latency Target (sec)</label>
-										<input type="number" id="latencyTarget" value="1.0"
-											class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
-														<p class="text-xs mt-1" style="color: #000000;">Max latency per request</p>
+										   <label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Latency Target (sec)</label>
+										   <input type="number" id="latencyTarget" value="1.0"
+										   class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
+										   <p class="text-xs mt-1" style="color: #666;">Max latency per request</p>
 									</div>
 
 									<div>
-										<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Monthly Budget ($)</label>
-										<input type="number" id="monthlyBudget" value="5000"
-											class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
+										   <label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Monthly Budget ($)</label>
+										   <input type="number" id="monthlyBudget" value="5000"
+										   class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
 									</div>
 
 									<div>
-										<label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Similarity Ratio (0-1)</label>
-										<input type="number" id="similarityRatio" value="0.5" min="0" max="1" step="0.1"
-											class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
-														<p class="text-xs mt-1" style="color: #000000;">Model similarity (higher = better optimization)</p>
+										   <label class="block text-sm font-semibold mb-2" style="color: #00ff00;">Similarity Ratio (0-1)</label>
+										   <input type="number" id="similarityRatio" value="0.5" min="0" max="1" step="0.1"
+										   class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2" style="background: #0a0e27; border: 1px solid #00ff00; color: #00ff00;" />
+										   <p class="text-xs mt-1" style="color: #666;">Model similarity (higher = better optimization)</p>
 									</div>
 
 									<button type="submit"
-										class="w-full px-6 py-3 rounded-lg hover:shadow-lg transition-all font-semibold mt-6" style="background: #00ff00; color: #0a0e27; box-shadow: 0 0 20px rgba(0,255,0,0.5);">
-										🚀 Optimize
+										   class="w-full px-6 py-3 rounded-lg hover:shadow-lg transition-all font-semibold mt-6" style="background: #00ff00; color: #0a0e27; box-shadow: 0 0 20px rgba(0,255,0,0.5);">
+											🚀 Optimize
 									</button>
-								</form>
-							</div>
+							</form>
 						</div>
+					</div>
 
-						<!-- Results -->
-						<div id="results-container" class="lg:col-span-2 space-y-6">
-							<div class="text-center py-16">
-								<p class="text-lg" style="color: #000000;">Fill in your requirements and click Optimize to see recommendations</p>
-							</div>
+					<!-- Results -->
+					<div id="results-container" class="lg:col-span-2 space-y-6">
+						<div class="text-center py-16">
+							<p class="text-lg" style="color: #666;">Fill in your requirements and click Optimize to see recommendations</p>
 						</div>
 					</div>
 				</div>
+			</div>
 
-				<!-- CHAT TAB -->
-				<div id="chat-tab" class="hidden">
-					<!-- Chat content will be here (copied from index.html) -->
-					<div class="rounded-lg shadow-lg p-6" style="background: #0f1424; border: 1px solid #00ff00;">
-						<div id="chatMessages" class="chat-container space-y-4 mb-6" style="height: 400px; overflow-y: auto;">
-							<div class="flex justify-center py-12">
-								<div class="text-center">
-									<div class="text-4xl mb-4">💬</div>
-										<p style="color: #000000;">Start a conversation with the AI</p>
-								</div>
+			<!-- CHAT TAB -->
+			<div id="chat-tab" class="hidden">
+				<!-- Chat content -->
+				<div class="rounded-lg shadow-lg p-6" style="background: #0f1424; border: 1px solid #00ff00;">
+					<div id="chatMessages" class="chat-container space-y-4 mb-6" style="height: 400px; overflow-y: auto;">
+						<div class="flex justify-center py-12">
+							<div class="text-center">
+								<div class="text-4xl mb-4">💬</div>
+								<p style="color: #666;">Start a conversation with the AI</p>
 							</div>
 						</div>
-
-						<form id="chatForm" class="flex gap-3">
-							<input type="text" id="userInput" placeholder="Type your message..."
-								class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
-							<input type="number" id="temperature" placeholder="Temperature" min="0" max="1" step="0.1" value="0.7"
-								class="w-20 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
-							<button type="submit"
-								class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all font-medium">
-								Send
-							</button>
-						</form>
 					</div>
+
+					<form id="chatForm" class="flex gap-3">
+						<input type="text" id="userInput" placeholder="Type your message..."
+							class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
+						<input type="number" id="temperature" placeholder="Temperature" min="0" max="1" step="0.1" value="0.7"
+							class="w-20 px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
+						<button type="submit"
+							class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all font-medium">
+							Send
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<!-- Footer -->
+	<footer class="mt-12 border-t" style="background: linear-gradient(135deg, #0f1424 0%, #0a0e27 100%); border-color: rgba(0,255,0,0.2);">
+		<div class="max-w-7xl mx-auto px-4 py-12">
+			<div class="grid grid-cols-4 gap-8 mb-8">
+				<!-- Brand -->
+				<div>
+					<div style="color: #00ff00; font-weight: bold; font-size: 18px; margin-bottom: 8px;" class="flex items-center gap-2">
+						<span style="font-size: 20px;">🧠</span>
+						KV Cognition
+					</div>
+					<p style="color: #b0b0b0; font-size: 14px;">AI infrastructure optimization for the modern era</p>
+				</div>
+				<!-- Product -->
+				<div>
+					<h4 class="font-semibold mb-4" style="color: #00ff00;">Product</h4>
+					<ul class="space-y-2 text-sm" style="color: #b0b0b0;">
+						<li><a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">Optimizer</a></li>
+						<li><a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">Analytics</a></li>
+						<li><a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">Chat Interface</a></li>
+						<li><a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">API</a></li>
+					</ul>
+				</div>
+				<!-- Company -->
+				<div>
+					<h4 class="font-semibold mb-4" style="color: #00ff00;">Company</h4>
+					<ul class="space-y-2 text-sm" style="color: #b0b0b0;">
+						<li><a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">About</a></li>
+						<li><a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">Blog</a></li>
+						<li><a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">Careers</a></li>
+						<li><a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">Contact</a></li>
+					</ul>
+				</div>
+				<!-- Legal -->
+				<div>
+					<h4 class="font-semibold mb-4" style="color: #00ff00;">Legal</h4>
+					<ul class="space-y-2 text-sm" style="color: #b0b0b0;">
+						<li><a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">Privacy</a></li>
+						<li><a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">Terms</a></li>
+						<li><a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">Security</a></li>
+						<li><a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">Status</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="border-t pt-8 flex items-center justify-between" style="border-color: rgba(0,255,0,0.2);">
+				<p style="color: #666;">© 2024 KV Cognition. All rights reserved.</p>
+				<div class="flex gap-4">
+					<a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s; font-size: 18px;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">𝕏</a>
+					<a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s; font-size: 18px;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">GitHub</a>
+					<a href="#" style="color: #b0b0b0; text-decoration: none; transition: color 0.3s; font-size: 18px;" onmouseover="this.style.color='#00ff00'" onmouseout="this.style.color='#b0b0b0'">LinkedIn</a>
+				</div>
+			</div>
+		</div>
+	</footer>
 
 	<script>
 		function switchTab(tab) {
@@ -235,20 +355,20 @@
 					<h3 class="text-2xl font-bold mb-4" style="color: #00ff00;">✅ Recommended GPU</h3>
 					<div class="grid grid-cols-2 gap-4">
 						<div>
-							<p style="color: #000000;">Cluster</p>
+							<p style="color: #666;">Cluster</p>
 							<p class="text-2xl font-bold" style="color: #00ff00;">${rec.cluster_name}</p>
-							<p class="text-sm" style="color: #000000;">${rec.gpu_type}</p>
+							<p class="text-sm" style="color: #666;">${rec.gpu_type}</p>
 						</div>
 						<div>
-							<p style="color: #000000;">Monthly Cost</p>
+							<p style="color: #666;">Monthly Cost</p>
 							<p class="text-3xl font-bold" style="color: #00ff00;">$${rec.monthly_cost}</p>
 						</div>
 						<div>
-							<p style="color: #000000;">Throughput</p>
+							<p style="color: #666;">Throughput</p>
 							<p class="text-lg font-semibold" style="color: #00ff00;">${rec.throughput_tokens_per_sec} tokens/sec</p>
 						</div>
 						<div>
-							<p style="color: #000000;">Potential Savings</p>
+							<p style="color: #666;">Potential Savings</p>
 							<p class="text-2xl font-bold savings-badge">$${data.potential_monthly_savings}/mo</p>
 						</div>
 					</div>
@@ -274,7 +394,7 @@
 			data.all_options.forEach((opt, idx) => {
 				const isRecommended = opt.cluster_id === rec.cluster_id;
 				const rowStyle = isRecommended ? 'background: rgba(0,255,0,0.15); border-left: 3px solid #00ff00;' : 'background: #0f1424; border-left: 3px solid transparent;';
-				const budgetOk = opt.budget_feasible ? '✅' : '❌';
+				const budgetOk = opt.budget_feasible ? '✅' : ' ❌';
 				const latencyOk = opt.meets_latency ? '✅' : '⚠️';
 				const textColor = isRecommended ? '#00ff00' : '#e0e0e0';
 
@@ -293,35 +413,36 @@
 			html += `
 						</tbody>
 					</table>
-				</div>
+			</div>
+		</div>
 
-				<div class="rounded-xl shadow-lg p-6" style="background: #1a1f3a; border: 1px solid #00ff00;">
-					<h3 class="text-lg font-bold mb-3" style="color: #00ff00;">📈 Optimization Summary</h3>
+		<div class="rounded-xl shadow-lg p-6" style="background: #1a1f3a; border: 1px solid #00ff00;">
+			<h3 class="text-lg font-bold mb-3" style="color: #00ff00;">📈 Optimization Summary</h3>
 
-						<div>
-							<p style="color: #00ff00;">Estimated Requests/Month</p>
-							<p class="font-semibold" style="color: #00ff00;">${data.requests_per_month.toLocaleString()}</p>
-						</div>
-						<div>
-							<p style="color: #00ff00;">Traffic Pattern</p>
-							<p class="font-semibold capitalize" style="color: #00ff00;">${data.optimization_summary.traffic_pattern}</p>
-						</div>
-						<div>
-							<p style="color: #00ff00;">Similarity Ratio</p>
-							<p class="font-semibold" style="color: #00ff00;">${(data.optimization_summary.similarity_ratio * 100).toFixed(0)}%</p>
-						</div>
-					</div>
+				<div>
+					<p style="color: #00ff00;">Estimated Requests/Month</p>
+					<p class="font-semibold" style="color: #00ff00;">${data.requests_per_month.toLocaleString()}</p>
 				</div>
+				<div>
+					<p style="color: #00ff00;">Traffic Pattern</p>
+					<p class="font-semibold capitalize" style="color: #00ff00;">${data.optimization_summary.traffic_pattern}</p>
+				</div>
+				<div>
+					<p style="color: #00ff00;">Similarity Ratio</p>
+					<p class="font-semibold" style="color: #00ff00;">${(data.optimization_summary.similarity_ratio * 100).toFixed(0)}%</p>
+				</div>
+			</div>
+		</div>
 			`;
 
 			resultsContainer.innerHTML = html;
 		}
 
-		// CHAT LOGIC (from previous implementation)
+		// CHAT LOGIC
 		let isLoading = false;
 		document.getElementById('chatForm').addEventListener('submit', async (e) => {
 			e.preventDefault();
-			
+
 			const chatMessages = document.getElementById('chatMessages');
 			const userInput = document.getElementById('userInput');
 			const temperature = document.getElementById('temperature');
@@ -388,7 +509,7 @@
 				` : '';
 				msgDiv.innerHTML = `
 					<div class="flex mb-4">
-									<div class="bg-gray-100 text-black rounded-lg px-4 py-2 max-w-xs">
+						<div class="bg-gray-100 text-black rounded-lg px-4 py-2 max-w-xs">
 							<div>${escapeHtml(content)}</div>
 							${metricsHtml}
 						</div>
